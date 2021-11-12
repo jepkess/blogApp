@@ -4,31 +4,31 @@ from ..models import Blogs,Role,User,Comments,Subscriber
 from .. import db
 from . import main
 # from ..email import mail_message
-# from .forms import BlogsForm,CommentForm,UpdateProfile,SubscriberForm
+from .forms import BlogsForm,CommentForm,UpdateProfile,SubscriberForm
 from ..requests import getQuotes
 
-# @main.route('/blog/', methods = ['GET','POST'])
-# @login_required
-# def new_blog():
+@main.route('/blog/', methods = ['GET','POST'])
+@login_required
+def new_blog():
 
-#     # form = BlogsForm()
+    form = BlogsForm()
 
-#     if form.validate_on_submit():
-#         category = form.category.data
-#         # print("category")
-#         blog= form.blog.data
-#         title=form.title.data
+    if form.validate_on_submit():
+        category = form.category.data
+        # print("category")
+        blog= form.blog.data
+        title=form.title.data
 
         
-#         new_blog = Blogs(title=title,category= category,blog= blog,user_id=current_user.id)
+        new_blog = Blogs(title=title,category= category,blog= blog,user_id=current_user.id)
 
-#         title='New Blog'
+        title='New Blog'
 
-#         new_blog.save_blog()
+        new_blog.save_blog()
 
-#         return redirect(url_for('main.index'))
+        return redirect(url_for('main.index'))
 
-#     return render_template('blogs.html',form= form)
+    return render_template('blogs.html',form= form)
 
 @main.route('/',methods=['GET'])
 def index():
@@ -63,24 +63,24 @@ def profile(uname):
 
     return render_template("profile/profile.html", user = user)
 
-# @main.route('/user/<uname>/update',methods = ['GET','POST'])
-# @login_required
-# def update_profile(uname):
-#     user = User.query.filter_by(author = uname).first()
-#     if user is None:
-#         abort(404)
+@main.route('/user/<uname>/update',methods = ['GET','POST'])
+@login_required
+def update_profile(uname):
+    user = User.query.filter_by(author = uname).first()
+    if user is None:
+        abort(404)
 
-#     form = UpdateProfile()
+    form = UpdateProfile()
 
-#     if form.validate_on_submit():
-#         user.bio = form.bio.data
+    if form.validate_on_submit():
+        user.bio = form.bio.data
 
-#         db.session.add(user)
-#         db.session.commit()
+        db.session.add(user)
+        db.session.commit()
 
-#         return redirect(url_for('.profile',uname=user.author))
+        return redirect(url_for('.profile',uname=user.author))
 
-    # return render_template('profile/update.html',form =form)
+    return render_template('profile/update.html',form =form)
 
 # @main.route('/user/<uname>/update/pic',methods= ['POST'])
 # @login_required
@@ -104,21 +104,21 @@ def comment(id):
     title = 'comments'
     return render_template('comments.html',comment = comm,title = title)
 
-# @main.route('/new_comment/<int:blogs_id>', methods = ['GET', 'POST'])
-# @login_required
-# def new_comment( blogs_id):
+@main.route('/new_comment/<int:blogs_id>', methods = ['GET', 'POST'])
+@login_required
+def new_comment( blogs_id):
     
-#     blogs = Blogs.query.filter_by(id = blogs_id).first()
-#     form = CommentForm()
+    blogs = Blogs.query.filter_by(id = blogs_id).first()
+    form = CommentForm()
 
-#     if form.validate_on_submit():
-#         comment = form.comment.data
-#         new_comment = Comments(comment=comment,user_id=current_user.id, blogs_id=blogs_id)
-#         new_comment.save_comment()
+    if form.validate_on_submit():
+        comment = form.comment.data
+        new_comment = Comments(comment=comment,user_id=current_user.id, blogs_id=blogs_id)
+        new_comment.save_comment()
 
-#         return redirect(url_for('main.category'))
-#     title='New Blog'
-#     return render_template('new_comment.html',title=title,comment_form = form,blogs_id=blogs_id)
+        return redirect(url_for('main.category'))
+    title='New Blog'
+    return render_template('new_comment.html',title=title,comment_form = form,blogs_id=blogs_id)
 
 
 @main.route('/delete/<int:id>', methods=['GET', 'POST'])
@@ -138,17 +138,17 @@ def deleteBlog(id):
     db.session.commit()
     return redirect(url_for('main.index'))
 
-# @main.route('/Subscribe',methods=['GET','POST'])
-# def subBlog():
+@main.route('/Subscribe',methods=['GET','POST'])
+def subBlog():
     
-#     form = SubscriberForm()
-#     if form.validate_on_submit():
-#         subs = Subscriber(email = form.email.data, username = form.username.data)    
-#         db.session.add(subs)
-#         db.session.commit()
+    form = SubscriberForm()
+    if form.validate_on_submit():
+        subs = Subscriber(email = form.email.data, username = form.username.data)    
+        db.session.add(subs)
+        db.session.commit()
 
 
-#         # mail_message("You have successfully subscribed to Awesome Blog website,Thank for joining us", "email/welcome_subs", subs.email,subs=subs)
-#         # return redirect(url_for('main.index'))
+        # mail_message("You have successfully subscribed to Awesome Blog website,Thank for joining us", "email/welcome_subs", subs.email,subs=subs)
+        # return redirect(url_for('main.index'))
     
-#     return render_template('subscriber.html',subscribe_form=form)
+    return render_template('subscriber.html',subscribe_form=form)
