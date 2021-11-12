@@ -7,17 +7,18 @@
 
 {% block content %}
 
-<div class="jumbotron text-center" style= "background-color: #55BCC9; color:white; padding: 5px;">
+<div class="jumbotron text-center" style= "background-color: #8E44AD; color:white; padding: 5px;">
    
   <h2>Welcome to Awesome Blog</h2>
-  <h3 style="font-style: italic;">Get your favourite and latest posts here,write a  posts today and you can also subscribe to get all the updates</h3>
+  <h3>Get your favourite and latest posts here</h3>
 </div>
     <div class="container">  
         <hr>
         <div class="row">
           <div class="col-md-4">
             <br>
-              <a href="../blog/" class="btn btn-info btn-sm">Create Blog</a>
+              <a href="../blog/" class="btn btn-info btn-sm">Create Blog</a>   
+              
               <a href="{{url_for('main.category')}}" class="btn btn-info btn-sm">View blogs</a>
 
             </div>
