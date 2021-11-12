@@ -11,13 +11,13 @@ def configure_request(app):
 def getQuotes(): 
     # request.urlopen(base_url):
         
-        lll = requests.get(base_url).json()
+        find = requests.get(base_url).json()
        
-        r=[]
-        id = lll.get('id')
-        author = lll.get('author')
-        quote = lll.get('quote')
+        v=[]
+        id = find.get('id')
+        author = find.get('author')
+        quote = find.get('quote')
 
         quoteObject = Quote(id,author,quote)
-        r.append(quoteObject)
-        return r
+        v.append(quoteObject)
+        return v
