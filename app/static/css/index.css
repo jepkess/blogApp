@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+
+.wrapper {
+    font-family: 'Montserrat';
+    background-color: rgb(2, 2, 32);
+    font-size:larger;
+}
+body {
+  
+    overflow-x: hidden;
+    overflow-y: hidden;
+}

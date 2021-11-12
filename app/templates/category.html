@@ -1,0 +1,46 @@
+{% extends 'base.html'%}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block styles%} {{ super() }}
+<link rel="stylesheet" href="../static/css/index.css">
+{% endblock %}
+
+{% block content %}
+<body>  
+  <div class="container">
+  <br> <hr>   
+  <h3 style="color:blue;">Blogs</h3>
+  
+    <div class="row">
+      <div class="col-md-4" > 
+        <div class="card-columns">
+          {% for category in category[::-1] %}
+
+          <div class="card bg-transparent border-success">
+            <div class="card-header bg-transparent border-success" style="color:blue">
+              {{category.title}}
+            </div>
+            <div class="card-body text">
+                <p>{{category.blog}}</p><br>
+                <footer class="blockquote-footer bg-transparent border-info" style="color:maroon">{{category.author}}
+                  <br><cite title="Source Title">Publish date: {{category.date.strftime('%Y-%m-%d')}}</cite></footer>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+              <a href="/comments/{{category.id}}" class="btn btn-info btn-sm">View comments</a>
+              <a href="/new_comment/{{category.id}}" class="btn btn-info btn-sm">Comment</a>
+              <a href="{{url_for('main.deleteBlog', id = category.id)}}" class="btn btn-info btn-sm">Delete Blog</a>
+
+              </div>
+              <hr> <br>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4" style="text-align: left;">
+
+  
+      {% endfor %}
+      </div>
+    </div>
+  </div>
+  </body>    
+      {% endblock %}
