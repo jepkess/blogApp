@@ -1,15 +1,24 @@
-from flask_login import login_required, current_user
 from flask import render_template,request,redirect,url_for, abort,flash
 from ..models import Blogs,Role,User,Comments,Subscriber
 from .. import db
 from . import main
+from flask_login import login_required, current_user
 # from ..email import mail_message
 from .forms import BlogsForm,CommentForm,UpdateProfile,SubscriberForm
 from ..requests import getQuotes
 
+
+@main.route('/',methods=['GET'])
+def index(): #view function that template (home.html)
+
+    getquotes = getQuotes()
+    message= "Welcome to Awesome Blog Website!!"
+    title= 'Awesome Blog'
+    return render_template('home.html',getquotes = getquotes,message=message,title=title)
+
 @main.route('/blog/', methods = ['GET','POST'])
 @login_required
-def new_blog():
+def new_blog(): # blog view function that renders the blog.html template.
 
     form = BlogsForm()
 
@@ -30,13 +39,7 @@ def new_blog():
 
     return render_template('blogs.html',form= form)
 
-@main.route('/',methods=['GET'])
-def index():
 
-    getquotes = getQuotes()
-    message= "Welcome to Awesome Blog Website!!"
-    title= 'Awesome Blog'
-    return render_template('home.html',getquotes = getquotes,message=message,title=title)
 
 
 @main.route('/categories')
