@@ -9,11 +9,10 @@ def configure_request(app):
     base_url = app.config['BASE_URL']
     
 def getQuotes(): 
-    # request.urlopen(base_url):
-        
+   
         find = requests.get(base_url).json()
        
-        v=[]
+        v=[] #an empty list for storing quotes
         id = find.get('id')
         author = find.get('author')
         quote = find.get('quote')
