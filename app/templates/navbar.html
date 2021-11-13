@@ -22,11 +22,13 @@
                           <li><a href="/Subscribe">Subscribe</a></li>
                           <li><a href="{{url_for('main.profile',uname=current_user.author)}}">Profile</a></li>  
                             <li role="separator" class="divider"></li>
+                            <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
                           
                           
                         </ul>
                     </li>
                     {% else %}
+                    <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
                    
                 
                 </ul>
