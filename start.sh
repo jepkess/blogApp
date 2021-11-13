@@ -1,1 +1,4 @@
 SECRET_KEY='DEVIED'
+export MAIL_USERNAME='biivincent1997@gmail.com'
+export MAIL_PASSWORD='0742787774'
+
