@@ -20,7 +20,7 @@ class Blogs(db.Model):
     category = db.Column(db.String(255))
     blog = db.Column(db.String(255))
     date = db.Column(db.DateTime(250), default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id",ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     comments = db.relationship('Comments', backref='title', lazy='dynamic')
 
     def save_blog(self):
@@ -118,7 +118,7 @@ class Subscriber(db.Model):
 
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255))
-    email = db.Column(db.String(255),unique = True,index = True)
+    email = db.Column(db.String(255))
 
     def __repr__(self):
         return f'Subscriber {self.username}'                          
