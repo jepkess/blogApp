@@ -1,4 +1,6 @@
 from flask import render_template,request,redirect,url_for, abort,flash
+
+from app.email import mail_message
 from ..models import Blogs,Role,User,Comments,Subscriber
 from .. import db,photos
 from . import main
@@ -25,10 +27,10 @@ def new_blog(): # blog view function that renders the blog.html template.
     if form.validate_on_submit():
         category = form.category.data
         # print("category")
-        blog= form.blog.data
+        blog= form.Blogs.data
         title=form.title.data
 
-        
+        #instances of a new blog
         new_blog = Blogs(title=title,category= category,blog= blog,user_id=current_user.id)
 
         title='New Blog'
@@ -36,8 +38,9 @@ def new_blog(): # blog view function that renders the blog.html template.
         new_blog.save_blog()
 
         return redirect(url_for('main.index'))
+    else:
 
-    return render_template('blogs.html',form= form)
+        return render_template('blogs.html',blog_form= form)
 
 
 
@@ -46,7 +49,7 @@ def new_blog(): # blog view function that renders the blog.html template.
 @login_required
 def category():
     '''
-    function to return the blogs by category
+    function to return the blogs byform category
     '''
     category = Blogs.get_blogs()
   
@@ -59,7 +62,7 @@ def category():
 
 @main.route('/user/<uname>')
 def profile(uname):
-    user = User.query.filter_by(author = uname).first()
+    user = User.query.filter_by(author= uname).first()
 
     if user is None:
         abort(404)
@@ -151,7 +154,7 @@ def subBlog():
         db.session.commit()
 
 
-        # mail_message("You have successfully subscribed to Awesome Blog website,Thank for joining us", "email/welcome_subs", subs.email,subs=subs)
-        # return redirect(url_for('main.index'))
+        mail_message("You have successfully subscribed to Awesome Blog website,Thank for joining us", "email/welcome_subs", subs.email,subs=subs)
+        return redirect(url_for('main.index'))
     
     return render_template('subscriber.html',subscribe_form=form)
