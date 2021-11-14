@@ -8,7 +8,7 @@ from ..models import Blogs, User,Subscriber
 
 class BlogsForm(FlaskForm):
     title = StringField('Blog Title',[validators.DataRequired(message='Field required')])
-    category=SelectField('Category', choices=[('NEWS','NEWS',('Technology','Technology'))])
+    category=SelectField('Category',choices=[('NEWS','NEWS'),('TECHNOLOGY','TECHNOLOGY')])
     Blogs=TextAreaField('Blogs')
     Submit=SubmitField('Submit')
 
