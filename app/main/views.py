@@ -62,7 +62,7 @@ def category():
 
 @main.route('/user/<uname>')
 def profile(uname):
-    user = User.query.filter_by(author= uname).first()
+    user = User.query.filter_by(username= uname).first()
 
     if user is None:
         abort(404)
@@ -72,7 +72,7 @@ def profile(uname):
 @main.route('/user/<uname>/update',methods = ['GET','POST'])
 @login_required
 def update_profile(uname):
-    user = User.query.filter_by(author = uname).first()
+    user = User.query.filter_by(username= uname).first()
     if user is None:
         abort(404)
 
@@ -84,20 +84,21 @@ def update_profile(uname):
         db.session.add(user)
         db.session.commit()
 
-        return redirect(url_for('.profile',uname=user.author))
+        return redirect(url_for('.profile',uname=user.username))
 
     return render_template('profile/update.html',form =form)
+
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
 def update_pic(uname):
-    user = User.query.filter_by(author = uname).first()
+    user = User.query.filter_by(username = uname).first()
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',uname=uname))
+    return redirect(url_for('main.profile',uname=uname)) 
 
 @main.route('/comments/<id>')
 @login_required
@@ -108,7 +109,7 @@ def comment(id):
     comm =Comments.get_comment(id)
    
     title = 'comments'
-    return render_template('comments.html',comment = comm,title = title)
+    return render_template('comment.html',comment = comm,title = title)
 
 @main.route('/new_comment/<int:blogs_id>', methods = ['GET', 'POST'])
 @login_required
@@ -145,11 +146,11 @@ def deleteBlog(id):
     return redirect(url_for('main.index'))
 
 @main.route('/Subscribe',methods=['GET','POST'])
-def subBlog():
+def single_Blog():
     
-    form = SubscriberForm()
-    if form.validate_on_submit():
-        subs = Subscriber(email = form.email.data, username = form.username.data)    
+    subscribe_form = SubscriberForm()
+    if subscribe_form.validate_on_submit():
+        subs = Subscriber(email = subscribe_form.email.data, username = subscribe_form.username.data)    
         db.session.add(subs)
         db.session.commit()
 
@@ -157,4 +158,4 @@ def subBlog():
         mail_message("You have successfully subscribed to Awesome Blog website,Thank for joining us", "email/welcome_subs", subs.email,subs=subs)
         return redirect(url_for('main.index'))
     
-    return render_template('subscriber.html',subscribe_form=form)
+    return render_template('subscriber.html',subscribe_form=subscribe_form)
