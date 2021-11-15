@@ -26,7 +26,7 @@ def new_blog(): # blog view function that renders the blog.html template.
 
     if form.validate_on_submit():
         category = form.category.data
-        # print("category")
+       
         blog= form.Blogs.data
         title=form.title.data
 
@@ -81,6 +81,7 @@ def update_profile(uname):
     if form.validate_on_submit():
         user.bio = form.bio.data
 
+
         db.session.add(user)
         db.session.commit()
 
@@ -98,7 +99,8 @@ def update_pic(uname):
         path = f'photos/{filename}'
         user.profile_pic_path = path
         db.session.commit()
-    return redirect(url_for('main.profile',uname=uname)) 
+    return redirect(url_for('main.profile',uname=uname))    
+     
 
 @main.route('/comments/<id>')
 @login_required
@@ -146,12 +148,15 @@ def deleteBlog(id):
     return redirect(url_for('main.index'))
 
 @main.route('/Subscribe',methods=['GET','POST'])
-def single_Blog():
+def One_Blog():
     
     subscribe_form = SubscriberForm()
+    
     if subscribe_form.validate_on_submit():
-        subs = Subscriber(email = subscribe_form.email.data, username = subscribe_form.username.data)    
-        db.session.add(subs)
+        email=subscribe_form.email.data
+        username= subscribe_form.username.data
+        subscribers = Subscriber(email = email, username = username)    
+        db.session.add(subscribers)
         db.session.commit()
 
 

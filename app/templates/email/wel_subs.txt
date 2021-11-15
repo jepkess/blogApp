@@ -1,3 +1,3 @@
-Hello {{subs.username}}
+Hello {{subscribers.username}}
 Thank you for subscribing to our website.
 We have just seen you have subscribed for our blogs and want to welcome you. You will be alerted when a new blog is posted.
