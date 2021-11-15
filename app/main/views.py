@@ -30,7 +30,7 @@ def new_blog(): # blog view function that renders the blog.html template.
         blog= form.Blogs.data
         title=form.title.data
 
-        #instances of a new blog
+        #creating an instance of a blog
         new_blog = Blogs(title=title,category= category,blog= blog,user_id=current_user.id)
 
         title='New Blog'
@@ -112,7 +112,7 @@ def comment(id):
 
 @main.route('/new_comment/<int:blogs_id>', methods = ['GET', 'POST'])
 @login_required
-def new_comment( blogs_id):
+def new_comments( blogs_id):
     
     blogs = Blogs.query.filter_by(id = blogs_id).first()
     form = CommentForm()
@@ -120,7 +120,7 @@ def new_comment( blogs_id):
     if form.validate_on_submit():
         comment = form.comment.data
         new_comment = Comments(comment=comment,user_id=current_user.id, blogs_id=blogs_id)
-        new_comment.save_comment()
+        new_comment.save_comments()
 
         return redirect(url_for('main.category'))
     title='New Blog'
