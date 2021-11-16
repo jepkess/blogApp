@@ -57,7 +57,7 @@ Open [localhost:5000](http://127.0.0.1:5000)
 5. CSS
 
 ## live link
-[live](https://bloggapplication.herokuapp.com/)
+[live](https://bloggapplication.herokuapp.com)
 
 
 ### Licence
