@@ -1,4 +1,4 @@
-SECRET_KEY='DEVIED'
+SECRET_KEY='ANALYSIS12'
 export MAIL_USERNAME='vincent.bii@student.moringaschool.com'
 export MAIL_PASSWORD='vini2016'
 
