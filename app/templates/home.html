@@ -8,11 +8,12 @@
 {% block content %}
 
 
-<div class="  text-center" style="background-color: #44ad44; color:white; padding: 10px;">
+<div class="  text-center" style="background-color: #44ad44; color:white; padding: 6px;">
 
   <h2>Welcome to the Blog website application, Have a fun with it!!!!!!!!</h2>
   <h3>Get your favourite and latest posts here</h3>
 </div>
+
 <div class="container-fluid text-center bg-success">
   <hr>
   <div class="row">
@@ -20,9 +21,7 @@
       <br>
 
 
-      <a href="../blog/" class="btn btn-warning btn-md">Create Blog</a>
 
-      <a href="{{url_for('main.category')}}" class="btn btn-warning btn-md">View blogs Here</a>
     </div>
 
     <div class="col-md-6">
@@ -34,18 +33,26 @@
         {% endfor %}
       </div>
     </div>
+
   </div>
 
 
 
 
 </div>
+<div class="text-center">
+  <br>
+  <a href="../blog/" class="btn btn-primary btn-md">Create Blog</a>
+
+  <a href="{{url_for('main.category')}}" class="btn btn-primary btn-md">View blogs Here</a>
+
+</div>
 <hr>
- <div class="container-fluid">
+<div class="container-fluid">
   <div class="card-footer text-center text-primary font-italic ">
     <p>copyright &copy; 2021 Vincent kipkirui</p>
   </div>
- </div>
+</div>
 
 
 

@@ -17,6 +17,7 @@ def index(): #view function that template (home.html)
     message= "Welcome to Awesome Blog Website!!"
     title= 'Awesome Blog'
     return render_template('home.html',getquotes = getquotes,message=message,title=title)
+    
 
 @main.route('/blog/', methods = ['GET','POST'])
 @login_required
@@ -117,7 +118,7 @@ def comment(id):
 @login_required
 def new_comments( blogs_id):
     
-    blogs = Blogs.query.filter_by(id = blogs_id).first()
+    blogs_id = Blogs.query.filter_by(id = blogs_id).first()
     form = CommentForm()
 
     if form.validate_on_submit():
