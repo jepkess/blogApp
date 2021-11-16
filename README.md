@@ -1,4 +1,4 @@
-Pitch Application
+Blog-App
 #### Author
 Vincent Kipkirui 
 
